@@ -272,7 +272,7 @@ dev.off()
 
 ## Variable Importance
 
-## Figure 3 importance boxplots (top 20)
+## Figure 4 importance boxplots (top 20)
 ```{r}
 
 ## each data
@@ -317,15 +317,17 @@ top_imp_plots <- map(unique(top_20s_sub$Race), function(race){
   p <- ggplot(df, 
          aes(y = Feature, x = top_incmse)) + 
   geom_boxplot(show.legend = F) + theme_bw() + 
-    geom_point(aes(color = Holdout_Division), show.legend = race == "Asian") + labs(col = "Holdout")
+    geom_point(aes(color = Holdout_Division), show.legend = race == "Asian") + 
+    labs(col = "Holdout")
   p + labs(y = "", x = "% Increase in MSE",
-           title = paste0(race, " models")) + ggplot2::scale_color_discrete()
+           title = paste0(race, " models")) + ggplot2::scale_color_discrete() + theme(legend.position = "bottom")
   
 })
 
 names(top_imp_plots) <- c("A", "B", "C", "D")
 
-fig6 = patchwork::wrap_plots(top_imp_plots, guides = "collect") + patchwork::plot_annotation(tag_levels = 'A')
+fig6 = patchwork::wrap_plots(top_imp_plots, guides = "collect") + 
+  patchwork::plot_annotation(tag_levels = 'A', theme = theme(legend.position = "bottom"))
 
 pdf("importance.pdf", width = 9, height = 6)
 fig6
@@ -334,7 +336,7 @@ dev.off()
 # ggsave("fig6.png",plot = fig6,dpi = 300,width = 9,height = 6)
 ```
 
-## Figure 4 marginal effects
+## Figure 5 marginal effects
 ```{r}
 
 
@@ -459,7 +461,7 @@ dev.off()
 
 ```
 
-
+## Figure 3
 ```{r}
 importances_final <- map_dfr(names(rf_models), function(race){
   
