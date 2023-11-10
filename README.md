@@ -1,6 +1,9 @@
 # Homeownership_disparity
 Supplemental Material for submitted work on homeownership disparity demographics in US Counties.
 
+Due to file size limits, most large datafiles are tracked via GitHub LFS. Please refer to the link below for additional information and installation to access all associated files.
+https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-large-files-on-github
+
 Files and folders are arranged as follows:
 
 Data_preprocessing_and_EDA
