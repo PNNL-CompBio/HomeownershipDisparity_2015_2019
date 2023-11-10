@@ -65,7 +65,7 @@ cntys$observed[as.numeric(cntys$county_fips) %in% keeps] <- "Observed"
 obs_plot <- ggplot() +
       geom_sf(cntys,
               mapping = aes(fill = observed),
-              color = "#ffffff", size = 0.25) +
+              color = NA, lwd = 0) +
       labs(fill = "") + theme_bw()
 obs_plot
 ## Region designations
@@ -75,7 +75,7 @@ region_join <- left_join(get_urbn_map("states", sf = TRUE), regions, by = c("sta
    scale_fill_brewer(palette = "Spectral") +
       geom_sf(region_join,
               mapping = aes(fill = Division),
-              color = "#ffffff", size = 0.25) +
+              color = NA, lwd = 0) +
       labs(fill = "") + theme_bw()
  region_plot
 
@@ -88,7 +88,7 @@ HO_join <-  left_join(cntys, HO_data, by = c("state_name" = "st", "county_name" 
  HO_plot <- ggplot() +
       geom_sf(HO_join,
               mapping = aes(fill = log(predicted_foreclosure_rate)),
-              color = "#ffffff", size = 0.25) +
+              color = NA, lwd = 0) +
       labs(fill = "log(foreclosure rate)") + theme_bw()  + 
    scale_fill_continuous(type = "viridis")
 HO_plot
@@ -99,11 +99,9 @@ pd_join <-  left_join(cntys, pop_density, by = c("county_fips" = "GEOID"))
 pop_density_plot <- ggplot() +
   geom_sf(pd_join,
           mapping = aes(fill = log(B01001_calc_PopDensity)),
-          color = "#ffffff", size = 0.25) +
+          color = NA, lwd = 0) +
   labs(fill = "log(population density)") + theme_bw()  + 
 scale_fill_continuous(type = "viridis")
-
-pop_density_plot
 
 ```
 
@@ -119,9 +117,9 @@ p <- suppressMessages(
 
 ggsave("maps.pdf", p, width=4, height=8, units="in", scale=1.5)
 
-pdf("maps.pdf", width = 8, height = 10, pointsize = 10)
-
-dev.off()
+# pdf("maps.pdf", width = 8, height = 10, pointsize = 10)
+# p
+# dev.off()
 
 ```
 
@@ -301,8 +299,10 @@ for(row in 1:nrow(var_desc)){
   var_search <- var_desc[row, "Variable.Name"]
   var_replace <- var_desc[row, "Simplified_Variable_Name"]
   top_20s_sub$Feature <- str_replace_all(top_20s_sub$Feature, var_search, var_replace)
+  "Waste.Management"
 }
 
+top_20s_sub$Feature <- gsub("Waste.jobMgmt", "jobWM", top_20s_sub$Feature)
 
 top_imp_plots <- map(unique(top_20s_sub$Race), function(race){
   
