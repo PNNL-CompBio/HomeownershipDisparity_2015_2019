@@ -1,6 +1,8 @@
 # Homeownership_disparity
 Supplemental Material for submitted work on homeownership disparity demographics in US Counties.
 
+This repository has been archived and is no longer maintained. The code is provided for historical reference and may contain unpatched or unknown vulnerabilities. It should not be used in production systems.
+
 Due to file size limits, most large datafiles are tracked via GitHub LFS. Please refer to the link below for additional information and installation to access all associated files.
 https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-large-files-on-github
 
